@@ -1,0 +1,20 @@
+#cloud-config
+hostname: nex0n-master
+manage_etc_hosts: true
+
+users:
+  - name: adminy
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    lock_passwd: false
+    passwd: "$6$rounds=4096$PLACEHOLDER_HASH"
+
+package_update: true
+packages:
+  - git
+  - curl
+  - vim
+
+runcmd:
+  - git clone https://github.com/District43/nex0n-cluster.git /root/nex0n
+  - bash /root/nex0n/scripts/install-master.sh
